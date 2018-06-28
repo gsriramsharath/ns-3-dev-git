@@ -87,23 +87,23 @@ cp gnuplotscriptQ ../
 cp gnuplotscriptCwnd ../cwndTraces/
 
 cd ../queueTraces/
-echo "Queue 0" > QueueStatsAfteS2sec.txt
-drops=`awk '{if ($1 >= 2) print $0}' drop-0.plotme | wc -l`
-marks=`awk '{if ($1 >= 2) print $0}' mark-0.plotme | wc -l`
-echo -e  "$drops Drops, $marks Marks\n" >> QueueStatsAfteS2sec.txt
+echo "Queue 0" > QueueStatsAfter3sec.txt
+drops=`awk '{if ($1 >= 3) print $0}' drop-0.plotme | wc -l`
+marks=`awk '{if ($1 >= 3) print $0}' mark-0.plotme | wc -l`
+echo -e  "$drops Drops, $marks Marks\n" >> QueueStatsAfte3sec.txt
 
-echo "Queue 1" >> QueueStatsAfteS2sec.txt
-drops=`awk '{if ($1 >= 2) print $0}' drop-1.plotme | wc -l`
-marks=`awk '{if ($1 >= 2) print $0}' mark-1.plotme | wc -l`
-echo -e  "$drops Drops, $marks Marks\n" >> QueueStatsAfteS2sec.txt
+echo "Queue 1" >> QueueStatsAfte3sec.txt
+drops=`awk '{if ($1 >= 3) print $0}' drop-1.plotme | wc -l`
+marks=`awk '{if ($1 >= 3) print $0}' mark-1.plotme | wc -l`
+echo -e  "$drops Drops, $marks Marks\n" >> QueueStatsAfte3sec.txt
 
-echo "Queue 2" >> QueueStatsAfteS2sec.txt
-drops=`awk '{if ($1 >= 2) print $0}' drop-2.plotme | wc -l`
-marks=`awk '{if ($1 >= 2) print $0}' mark-2.plotme | wc -l`
-echo -e  "$drops Drops, $marks Marks\n" >> QueueStatsAfteS2sec.txt
+echo "Queue 2" >> QueueStatsAfte3sec.txt
+drops=`awk '{if ($1 >= 3) print $0}' drop-2.plotme | wc -l`
+marks=`awk '{if ($1 >= 3) print $0}' mark-2.plotme | wc -l`
+echo -e  "$drops Drops, $marks Marks\n" >> QueueStatsAfte3sec.txt
 
 
-cp QueueStatsAfteS2sec.txt ../Graphs/
+cp QueueStatsAfte3sec.txt ../Graphs/
 
 cd ..
 gnuplot gnuplotscriptQ
