@@ -760,7 +760,7 @@ Config::Set ("/$ns3::NodeListPriv/NodeList/0/$ns3::Node/$ns3::TrafficControlLaye
   myfile << "Stat for Queue 1";
   myfile << qd1.Get (0)->GetStats ();
   myfile << "Stat for Queue 2";
-  myfile << qd1.Get (1)->GetStats ();
+  myfile << qd2.Get (1)->GetStats ();
   myfile.close ();
 
   myfile.open (dir + "config.txt", std::fstream::in | std::fstream::out | std::fstream::app);
