@@ -620,6 +620,7 @@ int main (int argc, char *argv[])
   Config::SetDefault ("ns3::TcpSocket::DelAckCount", UintegerValue (delAckCount));
   Config::SetDefault ("ns3::TcpSocket::SegmentSize", UintegerValue (dataSize));
   Config::SetDefault ("ns3::TcpSocketBase::EcnMode",StringValue("ClassicEcn"));
+  Config::SetDefault ("ns3::TcpSocketBase::Sack", BooleanValue (true));
 /*  Config::SetDefault ("ns3::PiQueueDisc::UseEcn", BooleanValue (useEcn));
   Config::SetDefault ("ns3::PiQueueDisc::MeanPktSize", UintegerValue (1500));
   Config::SetDefault ("ns3::PiQueueDisc::A", DoubleValue ( 0.00007477268187));
@@ -629,12 +630,11 @@ int main (int argc, char *argv[])
   Config::SetDefault ("ns3::RedQueueDisc::UseEcn", BooleanValue (useEcn));
   Config::SetDefault ("ns3::RedQueueDisc::ARED", BooleanValue (true));
   Config::SetDefault ("ns3::RedQueueDisc::Gentle", BooleanValue (true));
-  Config::SetDefault ("ns3::RedQueueDisc::LinkBandwidth", DataRateValue (DataRate ("10Mbps")));
   Config::SetDefault ("ns3::RedQueueDisc::MeanPktSize", UintegerValue (1500));
-  Config::SetDefault ("ns3::RedQueueDisc::LinkDelay", TimeValue (MilliSeconds (0.05)));
-  Config::SetDefault ("ns3::RedQueueDisc::MinTh", DoubleValue (113));
-  Config::SetDefault ("ns3::RedQueueDisc::MaxTh", DoubleValue (113));
+  Config::SetDefault ("ns3::RedQueueDisc::MinTh", DoubleValue (50));
+  Config::SetDefault ("ns3::RedQueueDisc::MaxTh", DoubleValue (50));
   Config::SetDefault ("ns3::RedQueueDisc::QW", DoubleValue (1));
+  Config::SetDefault ("ns3::RedQueueDisc::UseHardDrop", BooleanValue (false));
   Config::SetDefault (queue_disc_type + "::MaxSize", QueueSizeValue (QueueSize ("666p")));
 
   AsciiTraceHelper asciiTraceHelper;
