@@ -1246,6 +1246,10 @@ TcpSocketBase::DoForwardUp (Ptr<Packet> packet, const Address &fromAddress,
   TcpHeader tcpHeader;
   uint32_t bytesRemoved = packet->RemoveHeader (tcpHeader);
   SequenceNumber32 seq = tcpHeader.GetSequenceNumber ();
+  uint64_t now = (uint64_t) Simulator::Now ().GetMicroSeconds ();
+
+  Ptr<const TcpOptionTS> ts = DynamicCast<const TcpOptionTS> (tcpHeader.GetOption(TcpOption::TS));
+  std::cout<<"Source: "<<InetSocketAddress::ConvertFrom(fromAddress).GetIpv4 ()<<" Source Port: "<<tcpHeader.GetSourcePort()<<" Destination: "<<InetSocketAddress::ConvertFrom(toAddress).GetIpv4 ()<<" Destination Port: "<<tcpHeader.GetDestinationPort()<<" Sent Time: "<<ts->GetTimestamp()<<" Received Time: "<<(now & 0xFFFFFFFF)<<std::endl;
 
   if (m_state == ESTABLISHED && !(tcpHeader.GetFlags () & TcpHeader::RST))
     {

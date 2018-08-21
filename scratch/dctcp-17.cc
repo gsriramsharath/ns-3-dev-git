@@ -619,6 +619,7 @@ int main (int argc, char *argv[])
   Config::SetDefault ("ns3::TcpSocket::DelAckCount", UintegerValue (delAckCount));
   Config::SetDefault ("ns3::TcpSocket::SegmentSize", UintegerValue (dataSize));
   Config::SetDefault ("ns3::TcpSocketBase::UseEcn", BooleanValue (useEcn));
+  Config::SetDefault ("ns3::TcpSocketBase::Timestamp", BooleanValue (true));
   Config::SetDefault ("ns3::PiQueueDisc::UseEcn", BooleanValue (useEcn));
   Config::SetDefault ("ns3::PiQueueDisc::MeanPktSize", UintegerValue (1500));
   Config::SetDefault ("ns3::PiQueueDisc::A", DoubleValue ( 0.00007477268187));

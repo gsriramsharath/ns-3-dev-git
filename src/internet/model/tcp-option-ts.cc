@@ -133,7 +133,7 @@ TcpOptionTS::SetEcho (uint32_t ts)
 uint32_t
 TcpOptionTS::NowToTsValue ()
 {
-  uint64_t now = (uint64_t) Simulator::Now ().GetMilliSeconds ();
+  uint64_t now = (uint64_t) Simulator::Now ().GetMicroSeconds ();
 
   // high: (now & 0xFFFFFFFF00000000ULL) >> 32;
   // low: now & 0xFFFFFFFF
