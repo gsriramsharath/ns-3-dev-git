@@ -167,7 +167,8 @@ private:
   bool m_useEcn;                                //!< True if ECN is used (packets are marked instead of being dropped)
 
   // ** Variables maintained by PI
-  double m_dropProb;                            //!< Variable used in calculation of drop probability
+  //double m_dropProb;                            //!< Variable used in calculation of drop probability
+  TracedValue<double> m_dropProb; //!< Variable used in calculation of drop probability
   uint32_t m_qOld;                              //!< Old value of queue length
   EventId m_rtrsEvent;                          //!< Event used to decide the decision of interval of drop probability calculation
   Ptr<UniformRandomVariable> m_uv;              //!< Rng stream
