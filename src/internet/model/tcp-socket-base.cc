@@ -106,7 +106,7 @@ TcpSocketBase::GetTypeId (void)
                    MakeBooleanAccessor (&TcpSocketBase::m_sackEnabled),
                    MakeBooleanChecker ())
      .AddAttribute ("Fack","Enable or disable Fack option",
-                   BooleanValue(true),
+                   BooleanValue(false),
                    MakeBooleanAccessor(&TcpSocketBase::m_fackEnabled),
                    MakeBooleanChecker())
     .AddAttribute ("Timestamp", "Enable or disable Timestamp option",
@@ -1645,15 +1645,10 @@ TcpSocketBase::DupAck ()
     {
       // Check Tcp Fack recovery condition
       uint32_t fack_diff = std::max((int)0,((int)snd_fack)-((int)(m_txBuffer->HeadSequence().GetValue())));
-      if (m_fackEnabled && fack_diff>m_tcb->m_segmentSize*3)
-        {
-          EnterRecovery();
-          NS_ASSERT(m_tcb->m_congState==TcpSocketState::CA_RECOVERY);
-         }
       // RFC 6675, Section 5, continuing:
       // ... and take the following steps:
       // (1) If DupAcks >= DupThresh, go to step (4).
-      if ((m_dupAckCount == m_retxThresh) && (m_highRxAckMark >= m_recover))
+      if ((m_fackEnabled && fack_diff > m_tcb->m_segmentSize*3) || ((m_dupAckCount == m_retxThresh) && (m_highRxAckMark >= m_recover)))
         {
           EnterRecovery ();
           NS_ASSERT (m_tcb->m_congState == TcpSocketState::CA_RECOVERY);
@@ -1761,9 +1756,9 @@ TcpSocketBase::ProcessAck (const SequenceNumber32 &ackNumber, bool scoreboardUpd
    *     HighData (m_highTxMark)
    */
 
-   // Decrease retran_data in case of received retransmitted acknowledgement
-  if(m_fackEnabled&&ackNumber==m_txBuffer->HeadSequence() && m_tcb->m_congState==TcpSocketState::CA_RECOVERY)
-    retran_data = std::max((int)0,((int)retran_data)-((int)(m_tcb->m_segmentSize)));
+  // Decrease retran_data in case of received retransmitted acknowledgement
+  if (m_fackEnabled && ackNumber==m_txBuffer->HeadSequence() && m_tcb->m_congState==TcpSocketState::CA_RECOVERY)
+     retran_data = std::max((int)0,((int)retran_data)-((int)(m_tcb->m_segmentSize)));
 
   bool isDupack = m_sackEnabled ?
     scoreboardUpdated
@@ -3209,13 +3204,13 @@ TcpSocketBase::AvailableWindow () const
     
       // Update awnd
       if (m_fackEnabled && win >= m_tcb->m_ssThresh)
-         {
-        uint32_t awnd = std::max((int)0,((int)(m_tcb->m_nextTxSequence.Get().GetValue()))-((int)snd_fack));
-        if((m_tcb->m_congState)==TcpSocketState::CA_RECOVERY)
+        {
+         uint32_t awnd = std::max((int)0,((int)(m_tcb->m_nextTxSequence.Get().GetValue()))-((int)snd_fack));
+         if ((m_tcb->m_congState) == TcpSocketState::CA_RECOVERY)
             awnd+=retran_data; 
-        uint32_t awnd_diff = std::max((int)0,((int)win)-((int)awnd));
-        return awnd_diff;
-         }
+         uint32_t awnd_diff = std::max((int)0,((int)win)-((int)awnd));
+         return awnd_diff;
+        }
     }
 
   uint32_t inflight = BytesInFlight (); // Number of outstanding bytes
@@ -3416,8 +3411,8 @@ TcpSocketBase::NewAck (SequenceNumber32 const& ack, bool resetRTO)
   m_dataRetrCount = m_dataRetries;
 
   // Increment snd_fack if possible
-  if(m_fackEnabled&&ack.GetValue()>snd_fack)
-    snd_fack = ack.GetValue();
+  if (m_fackEnabled && ack.GetValue() > snd_fack)
+     snd_fack = ack.GetValue();
 
   if (m_state != SYN_RCVD && resetRTO)
     { // Set RTO unless the ACK is received in SYN_RCVD state
@@ -3702,8 +3697,8 @@ TcpSocketBase::DoRetransmit ()
   uint32_t sz = SendDataPacket (m_tcb->m_nextTxSequence, m_tcb->m_segmentSize, true);
 
   // Increase retran_data for retransmitted packets
-  if(m_fackEnabled)
-    retran_data += sz;
+  if (m_fackEnabled)
+     retran_data += sz;
 
   NS_ASSERT (sz > 0);
 }
@@ -3994,12 +3989,14 @@ TcpSocketBase::ProcessOptionSack (const Ptr<const TcpOption> option)
   TcpOptionSack::SackList list = s->GetSackList ();
 
   // Update snd_fack with sack blocks
-  if(m_fackEnabled){
-    for(auto it = list.begin(); it!=list.end(); it++){
-        if((it->second).GetValue()>snd_fack)
+  if (m_fackEnabled)
+    {
+     for (auto it = list.begin(); it!=list.end(); it++)
+        {
+         if((it->second).GetValue() > snd_fack)
           snd_fack = (it->second).GetValue();
+        }
     }
-  }
 
   return m_txBuffer->Update (list);
 }
