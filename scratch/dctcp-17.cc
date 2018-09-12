@@ -92,7 +92,7 @@ CheckQueueSize2 (Ptr<QueueDisc> queue)
 static void
 CwndChange (Ptr<OutputStreamWrapper> stream, uint32_t oldCwnd, uint32_t newCwnd)
 {
-  *stream->GetStream () << Simulator::Now ().GetSeconds () << " " << newCwnd << std::endl;
+  *stream->GetStream () << Simulator::Now ().GetSeconds () << " " << newCwnd/1446.0 << std::endl;
 }
 
 static void
