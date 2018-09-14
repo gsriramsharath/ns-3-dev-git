@@ -568,8 +568,8 @@ public:
   typedef void (* TcpTxRxTracedCallback)(const Ptr<const Packet> packet, const TcpHeader& header,
                                          const Ptr<const TcpSocketBase> socket);
 
-  uint32_t snd_fack;
-  uint32_t retran_data;
+  uint32_t m_sndFack;
+  uint32_t m_retranData;
 
 protected:
   // Implementing ns3::TcpSocket -- Attribute get/set
