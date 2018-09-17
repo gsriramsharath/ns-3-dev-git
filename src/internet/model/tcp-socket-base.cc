@@ -1644,11 +1644,12 @@ TcpSocketBase::DupAck ()
   else if (m_tcb->m_congState == TcpSocketState::CA_DISORDER)
     {
       // Check Tcp Fack recovery condition
-      uint32_t fack_diff = std::max((int)0,((int)m_sndFack)-((int)(m_txBuffer->HeadSequence().GetValue())));
+      uint32_t fack_diff = std::max((int) 0, ((int) m_sndFack) - ((int) (m_txBuffer->HeadSequence ().GetValue ())));
       // RFC 6675, Section 5, continuing:
       // ... and take the following steps:
       // (1) If DupAcks >= DupThresh, go to step (4).
-      if ((m_fackEnabled && fack_diff > m_tcb->m_segmentSize*3) || ((m_dupAckCount == m_retxThresh) && (m_highRxAckMark >= m_recover)))
+      if ((m_fackEnabled && fack_diff > m_tcb->m_segmentSize * 3)
+         || ((m_dupAckCount == m_retxThresh) && (m_highRxAckMark >= m_recover)))
         {
           EnterRecovery ();
           NS_ASSERT (m_tcb->m_congState == TcpSocketState::CA_RECOVERY);
@@ -1757,8 +1758,12 @@ TcpSocketBase::ProcessAck (const SequenceNumber32 &ackNumber, bool scoreboardUpd
    */
 
   // Decrease m_retranData in case of received retransmitted acknowledgement
-  if (m_fackEnabled && ackNumber==m_txBuffer->HeadSequence() && m_tcb->m_congState==TcpSocketState::CA_RECOVERY)
-     m_retranData = std::max((int)0,((int)m_retranData)-((int)(m_tcb->m_segmentSize)));
+  if (m_fackEnabled
+      && ackNumber==m_txBuffer->HeadSequence()
+      && m_tcb->m_congState==TcpSocketState::CA_RECOVERY)
+     {
+       m_retranData = std::max((int) 0,((int) m_retranData) - ((int) (m_tcb->m_segmentSize)));
+     }
 
   bool isDupack = m_sackEnabled ?
     scoreboardUpdated
@@ -3200,15 +3205,16 @@ TcpSocketBase::AvailableWindow () const
   uint32_t win = Window ();             // Number of bytes allowed to be outstanding
 
   if (m_sackEnabled)
-    {
-    
+    {    
       // Update awnd
       if (m_fackEnabled && win >= m_tcb->m_ssThresh)
         {
-         uint32_t awnd = std::max((int)0,((int)(m_tcb->m_nextTxSequence.Get().GetValue()))-((int)m_sndFack));
-         if ((m_tcb->m_congState) == TcpSocketState::CA_RECOVERY)
-            awnd+=m_retranData; 
-         uint32_t awnd_diff = std::max((int)0,((int)win)-((int)awnd));
+          uint32_t awnd = std::max((int)0,((int)(m_tcb->m_nextTxSequence.Get().GetValue()))-((int)m_sndFack));
+          if ((m_tcb->m_congState) == TcpSocketState::CA_RECOVERY)
+            {
+              awnd += m_retranData; 
+            }
+         uint32_t awnd_diff = std::max((int) 0, ((int) win) - ((int) awnd));
          return awnd_diff;
         }
     }
@@ -3412,7 +3418,9 @@ TcpSocketBase::NewAck (SequenceNumber32 const& ack, bool resetRTO)
 
   // Increment m_sndFack if possible
   if (m_fackEnabled && ack.GetValue() > m_sndFack)
-     m_sndFack = ack.GetValue();
+    {
+      m_sndFack = ack.GetValue();
+    }
 
   if (m_state != SYN_RCVD && resetRTO)
     { // Set RTO unless the ACK is received in SYN_RCVD state
@@ -3698,7 +3706,9 @@ TcpSocketBase::DoRetransmit ()
 
   // Increase m_retranData for retransmitted packets
   if (m_fackEnabled)
-     m_retranData += sz;
+    {
+      m_retranData += sz;
+    }
 
   NS_ASSERT (sz > 0);
 }
@@ -3988,14 +3998,16 @@ TcpSocketBase::ProcessOptionSack (const Ptr<const TcpOption> option)
   Ptr<const TcpOptionSack> s = DynamicCast<const TcpOptionSack> (option);
   TcpOptionSack::SackList list = s->GetSackList ();
 
-  // Update m_sndFack with sack blocks
+  // Update m_sndFack with the highest sequence number acknowledged from the sack blocks
   if (m_fackEnabled)
     {
-     for (auto it = list.begin(); it!=list.end(); it++)
-        {
-         if((it->second).GetValue() > m_sndFack)
-          m_sndFack = (it->second).GetValue();
-        }
+      for (auto it = list.begin(); it!=list.end(); it++)
+         {
+           if ((it->second).GetValue() > m_sndFack)
+             {
+               m_sndFack = (it->second).GetValue();
+             }
+         }
     }
 
   return m_txBuffer->Update (list);

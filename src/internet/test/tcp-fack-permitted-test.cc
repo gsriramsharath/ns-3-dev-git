@@ -1,6 +1,6 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 /*
- * Copyright (c) 2016 Natale Patriciello <natale.patriciello@gmail.com>
+ * Copyright (c) 2018 NITK Surathkal
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -15,6 +15,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
+ * Authors: Shikha Bakshi <shikhabakshi912@gmail.com>
+ *          Mohit P. Tahiliani <tahiliani@nitk.edu.in>
  */
 
 #include "tcp-general-test.h"
@@ -53,8 +55,6 @@ public:
 protected:
   virtual Ptr<TcpSocketMsgBase> CreateReceiverSocket (Ptr<Node> node);
   virtual Ptr<TcpSocketMsgBase> CreateSenderSocket (Ptr<Node> node);
-
-//  virtual void Tx (const Ptr<const Packet> p, const TcpHeader&h, SocketWho who);
 
   Configuration m_configuration; //!< The configuration
 };
@@ -119,85 +119,11 @@ FackPermittedTestCase::CreateSenderSocket (Ptr<Node> node)
   return socket;
 }
 
-/*void
-FackPermittedTestCase::Tx (const Ptr<const Packet> p, const TcpHeader &h, SocketWho who)
-{
-
-  if (!(h.GetFlags () & TcpHeader::SYN))
-    {
-      NS_TEST_ASSERT_MSG_EQ (h.HasOption (TcpOption::SACKPERMITTED), false,
-                             "FackPermitted in non-SYN segment");
-      return;
-    }
-
-  if (m_configuration == DISABLED)
-    {
-      NS_TEST_ASSERT_MSG_EQ (h.HasOption (TcpOption::SACKPERMITTED), false,
-                             "FackPermitted disabled but option enabled");
-    }
-  else if (m_configuration == ENABLED)
-    {
-      NS_TEST_ASSERT_MSG_EQ (h.HasOption (TcpOption::SACKPERMITTED), true,
-                             "FackPermitted enabled but option disabled");
-    }
-
-  NS_LOG_INFO (h);
-  if (who == SENDER)
-    {
-      if (h.GetFlags () & TcpHeader::SYN)
-        {
-          if (m_configuration == ENABLED_RECEIVER)
-            {
-              NS_TEST_ASSERT_MSG_EQ (h.HasOption (TcpOption::SACKPERMITTED), false,
-                                     "FackPermitted disabled but option enabled");
-            }
-          else if (m_configuration == ENABLED_SENDER)
-            {
-              NS_TEST_ASSERT_MSG_EQ (h.HasOption (TcpOption::SACKPERMITTED), true,
-                                     "FackPermitted enabled but option disabled");
-            }
-        }
-      else
-        {
-          if (m_configuration != ENABLED)
-            {
-              NS_TEST_ASSERT_MSG_EQ (h.HasOption (TcpOption::SACKPERMITTED), false,
-                                     "FackPermitted disabled but option enabled");
-            }
-        }
-    }
-  else if (who == RECEIVER)
-    {
-      if (h.GetFlags () & TcpHeader::SYN)
-        {
-          // Sender has not sent FackPermitted, so implementation should disable ts
-          if (m_configuration == ENABLED_RECEIVER)
-            {
-              NS_TEST_ASSERT_MSG_EQ (h.HasOption (TcpOption::SACKPERMITTED), false,
-                                     "sender has not ts, but receiver sent anyway");
-            }
-          else if (m_configuration == ENABLED_SENDER)
-            {
-              NS_TEST_ASSERT_MSG_EQ (h.HasOption (TcpOption::SACKPERMITTED), false,
-                                     "receiver has not ts enabled but sent anyway");
-            }
-        }
-      else
-        {
-          if (m_configuration != ENABLED)
-            {
-              NS_TEST_ASSERT_MSG_EQ (h.HasOption (TcpOption::SACKPERMITTED), false,
-                                     "FackPermitted disabled but option enabled");
-            }
-        }
-    }
-}
-*/
-/**
+ /*
  * \ingroup internet-test
  *  \ingroup tests
  *
- * The test case for testing the TCP SACK PERMITTED option.
+ * The test case for testing the TCP FACK PERMITTED option.
  */
 class TcpFackPermittedTestSuite : public TestSuite
 {

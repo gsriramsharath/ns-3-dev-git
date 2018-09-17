@@ -19,11 +19,10 @@
  *          Mohit P. Tahiliani <tahiliani@nitk.edu.in>
  */
 
-// The network topology used in this example is based on the Fig. 17 described in
-// Mohammad Alizadeh, Albert Greenberg, David A. Maltz, Jitendra Padhye,
-// Parveen Patel, Balaji Prabhakar, Sudipta Sengupta, and Murari Sridharan.
-// "Data Center TCP (DCTCP)." In ACM SIGCOMM Computer Communication Review,
-// Vol. 40, No. 4, pp. 63-74. ACM, 2010.
+// The network topology used in this example is based on the Fig. 1 described in
+//Mathis, M., & Mahdavi, J. (1996, August). 
+//Forward acknowledgement: Refining TCP congestion control.
+//In ACM SIGCOMM Computer Communication Review (Vol. 26, No. 4, pp. 281-291). ACM.
 
 #include <iostream>
 #include <string>
@@ -241,17 +240,10 @@ int main (int argc, char *argv[])
 
   Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
 
- Simulator::Stop (Seconds (stopTime));
+  Simulator::Stop (Seconds (stopTime));
   Simulator::Run ();
 
   Simulator::Destroy ();
   return 0;
 }
-
- 
-  
-
-  
-
-
 
