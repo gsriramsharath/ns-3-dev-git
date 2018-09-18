@@ -54,6 +54,7 @@
 #include "tcp-option-sack-permitted.h"
 #include "tcp-option-sack.h"
 #include "tcp-congestion-ops.h"
+#include <fstream>
 
 #include <math.h>
 #include <algorithm>
@@ -1249,7 +1250,10 @@ TcpSocketBase::DoForwardUp (Ptr<Packet> packet, const Address &fromAddress,
   uint64_t now = (uint64_t) Simulator::Now ().GetMicroSeconds ();
 
   Ptr<const TcpOptionTS> ts = DynamicCast<const TcpOptionTS> (tcpHeader.GetOption(TcpOption::TS));
-  std::cout<<"Source: "<<InetSocketAddress::ConvertFrom(fromAddress).GetIpv4 ()<<" Source Port: "<<tcpHeader.GetSourcePort()<<" Destination: "<<InetSocketAddress::ConvertFrom(toAddress).GetIpv4 ()<<" Destination Port: "<<tcpHeader.GetDestinationPort()<<" Sent Time: "<<ts->GetTimestamp()<<" Received Time: "<<(now & 0xFFFFFFFF)<<std::endl;
+  std::ofstream file;
+  file.open ("dctcp.txt",std::ios::app);
+  file <<"Source: "<<InetSocketAddress::ConvertFrom(fromAddress).GetIpv4 ()<<" Source Port: "<<tcpHeader.GetSourcePort()<<" Destination: "<<InetSocketAddress::ConvertFrom(toAddress).GetIpv4 ()<<" Destination Port: "<<tcpHeader.GetDestinationPort()<<" Sent Time: "<<ts->GetTimestamp()<<" Received Time: "<<(now & 0xFFFFFFFF)<<std::endl;
+  file.close ();
 
   if (m_state == ESTABLISHED && !(tcpHeader.GetFlags () & TcpHeader::RST))
     {
