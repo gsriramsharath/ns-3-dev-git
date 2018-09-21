@@ -426,7 +426,7 @@ TcpSocketBase::~TcpSocketBase (void)
       /*
        * Upon Bind, an Ipv4Endpoint is allocated and set to m_endPoint, and
        * DestroyCallback is set to TcpSocketBase::Destroy. If we called
-       * m_tcp->DeAllocate, it wil destroy its Ipv4EndpointDemux::DeAllocate,
+       * m_tcp->DeAllocate, it will destroy its Ipv4EndpointDemux::DeAllocate,
        * which in turn destroys my m_endPoint, and in turn invokes
        * TcpSocketBase::Destroy to nullify m_node, m_endPoint, and m_tcp.
        */
@@ -760,7 +760,7 @@ TcpSocketBase::ShutdownSend (void)
     {
       if (m_state == ESTABLISHED || m_state == CLOSE_WAIT)
         {
-          NS_LOG_INFO ("Emtpy tx buffer, send fin");
+          NS_LOG_INFO ("Empty tx buffer, send fin");
           SendEmptyPacket (TcpHeader::FIN);
 
           if (m_state == ESTABLISHED)
@@ -1704,7 +1704,10 @@ TcpSocketBase::ReceivedAck (Ptr<Packet> packet, const TcpHeader& tcpHeader)
           m_tcb->m_ecnState = TcpSocketState::ECN_ECE_RCVD;
         }
     }
-
+  else if(m_tcb->m_ecnState == TcpSocketState::ECN_ECE_RCVD && !(tcpHeader.GetFlags () & TcpHeader::ECE) )
+    {
+      m_tcb->m_ecnState = TcpSocketState::ECN_IDLE;
+    }
   // RFC 6675 Section 5: 2nd, 3rd paragraph and point (A), (B) implementation
   // are inside the function ProcessAck
   ProcessAck (ackNumber, scoreboardUpdated, oldHeadSequence);
@@ -2925,12 +2928,6 @@ TcpSocketBase::SendDataPacket (SequenceNumber32 seq, uint32_t maxSize, bool with
       NS_LOG_DEBUG (TcpSocketState::EcnStateName[m_tcb->m_ecnState] << " -> ECN_CWR_SENT");
       m_tcb->m_ecnState = TcpSocketState::ECN_CWR_SENT;
       NS_LOG_INFO ("CWR flags set");
-      NS_LOG_DEBUG (TcpSocketState::TcpCongStateName[m_tcb->m_congState] << " -> CA_CWR");
-      if (m_tcb->m_congState == TcpSocketState::CA_OPEN)
-        {
-          m_congestionControl->CongestionStateSet (m_tcb, TcpSocketState::CA_CWR);
-          m_tcb->m_congState = TcpSocketState::CA_CWR;
-        }
     }
 
   AddSocketTags (p);
@@ -4076,7 +4073,7 @@ TcpSocketBase::ProcessOptionTimestamp (const Ptr<const TcpOption> option,
 
   Ptr<const TcpOptionTS> ts = DynamicCast<const TcpOptionTS> (option);
 
-  // This is valid only when no overflow occours. It happens
+  // This is valid only when no overflow occurs. It happens
   // when a connection last longer than 50 days.
   if (m_tcb->m_rcvTimestampValue > ts->GetTimestamp ())
     {
