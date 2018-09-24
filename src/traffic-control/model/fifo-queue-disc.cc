@@ -1,4 +1,4 @@
-/* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
+///* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 /*
  * Copyright (c) 2017 Universita' degli Studi di Napoli Federico II
  *
@@ -42,6 +42,21 @@ TypeId FifoQueueDisc::GetTypeId (void)
                    MakeQueueSizeAccessor (&QueueDisc::SetMaxSize,
                                           &QueueDisc::GetMaxSize),
                    MakeQueueSizeChecker ())
+     .AddAttribute ("MeanPktSize",
+                   "Average of packet size",
+                   UintegerValue (500),
+                   MakeUintegerAccessor (&FifoQueueDisc::m_meanPktSize),
+                   MakeUintegerChecker<uint32_t> ())
+    .AddAttribute ("UseEcn",
+                   "True to always drop packets above max threshold",
+                    BooleanValue (false),
+                    MakeBooleanAccessor (&FifoQueueDisc::m_useEcn),
+                    MakeBooleanChecker ())
+    .AddAttribute ("Limit",
+                   "Mark Packets if queue is filled above limit",
+                   DoubleValue (17),
+                   MakeDoubleAccessor (&FifoQueueDisc::m_limit),
+                   MakeDoubleChecker<double> ())
   ;
   return tid;
 }
@@ -61,14 +76,20 @@ bool
 FifoQueueDisc::DoEnqueue (Ptr<QueueDiscItem> item)
 {
   NS_LOG_FUNCTION (this << item);
+  
+  int32_t nQueued = GetInternalQueue (0)->GetCurrentSize ().GetValue () + (item->GetSize ()/m_meanPktSize);
 
   if (GetCurrentSize () + item > GetMaxSize ())
     {
-      NS_LOG_LOGIC ("Queue full -- dropping pkt");
-      DropBeforeEnqueue (item, LIMIT_EXCEEDED_DROP);
-      return false;
+          NS_LOG_LOGIC ("Queue full -- dropping pkt");
+          DropBeforeEnqueue (item, LIMIT_EXCEEDED_DROP);
+           return false;
     }
-
+  else if ( nQueued > m_limit && m_useEcn && Mark (item, FORCED_MARK))
+    {
+     NS_LOG_DEBUG ("\t Marking due to greater than limit ");
+    }
+  
   bool retval = GetInternalQueue (0)->Enqueue (item);
 
   // If Queue::Enqueue fails, QueueDisc::DropBeforeEnqueue is called by the
@@ -148,6 +169,7 @@ void
 FifoQueueDisc::InitializeParams (void)
 {
   NS_LOG_FUNCTION (this);
+  m_limit = GetMaxSize ().GetValue () * ( m_limit * 0.01);
 }
 
 } // namespace ns3
