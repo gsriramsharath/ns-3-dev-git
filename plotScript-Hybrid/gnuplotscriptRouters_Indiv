@@ -1,0 +1,65 @@
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set yrange [0:110]
+set xrange [3:10]
+set output "TP-Router-Percent_R1.png"
+set xlabel "Time (sec)"
+set ylabel "Link Utilization (%)"
+set key outside;
+set key right top;
+plot "TP-T1.plotme" using ($1):($2/.1) title "R1" with lines lw 1.5
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "TP-Router-Percent_R2.png"
+set xlabel "Time (sec)"
+set ylabel "Link Utilization (%)"
+set key outside;
+set key right top;
+plot "TP-T2.plotme" using ($1):($2/.1) title "R2" with lines lw 1.5
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "TP-Router-Percent_R3.png"
+set xlabel "Time (sec)"
+set ylabel "Link Utilization (%)"
+set key outside;
+set key right top;
+plot "TP-T3.plotme" using ($1):($2/.01) title "R3" with lines lw 1.5
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "TP-Router-Percent_R4.png"
+set xlabel "Time (sec)"
+set ylabel "Link Utilization (%)"
+set key outside;
+set key right top;
+plot "TP-T4.plotme" using ($1):($2/.0015) title "R4" with lines lw 1.5 
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "TP-Router-Percent_R5.png"
+set xlabel "Time (sec)"
+set ylabel "Link Utilization (%)"
+set key outside;
+set key right top;
+plot "TP-T5.plotme" using ($1):($2/.0005) title "R5" with lines lw 1.5
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "TP-Router-Percent_R6.png"
+set xlabel "Time (sec)"
+set ylabel "Link Utilization (%)"
+set key outside;
+set key right top;
+plot "TP-T6.plotme" using ($1):($2/.0015) title "R6" with lines lw 1.5
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "TP-Router-Percent_R7.png"
+set xlabel "Time (sec)"
+set ylabel "Link Utilization (%)"
+set key outside;
+set key right top;
+plot "TP-T7.plotme" using ($1):($2/.0015) title "R7" with lines lw 1.5
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "TP-Router-Percent_R8.png"
+set xlabel "Time (sec)"
+set ylabel "Link Utilization (%)"
+set key outside;
+set key right top;
+plot "TP-T8.plotme" using ($1):($2/.001) title "R8" with lines lw 1.5
