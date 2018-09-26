@@ -41,16 +41,16 @@
 #include "ns3/gtk-config-store.h"
 #include "ns3/flow-monitor-module.h"
 #include "ns3/callback.h"
-//#include "ns3/tcp-socket-base.h"
+
 
 using namespace ns3;
 
 std::vector<std::stringstream> filePlotQueue;
-//std::vector<std::stringstream> filePlotPacketSojourn;
 Ptr<UniformRandomVariable> uv = CreateObject<UniformRandomVariable> ();
 std::string dir = "results/gfc-dctcp/";
 double stopTime = 10;
 
+// Function to check Queue Length of Triumph 1.
 void
 CheckQueueSize (Ptr<QueueDisc> queue)
 {
@@ -64,6 +64,7 @@ CheckQueueSize (Ptr<QueueDisc> queue)
   fPlotQueue.close ();
 }
 
+// Function to check Queue Length of Scorpion Switch.
 void
 CheckQueueSize1 (Ptr<QueueDisc> queue)
 {
@@ -77,6 +78,7 @@ CheckQueueSize1 (Ptr<QueueDisc> queue)
   fPlotQueue.close ();
 }
 
+// Function to check Queue Length of Triumph 2.
 void
 CheckQueueSize2 (Ptr<QueueDisc> queue)
 {
@@ -90,6 +92,7 @@ CheckQueueSize2 (Ptr<QueueDisc> queue)
   fPlotQueue.close ();
 }
 
+// Functions to trace change in cwnd for senders S1-1 to S1-10
 static void
 CwndChangeS10 (uint32_t oldCwnd, uint32_t newCwnd)
 {
@@ -137,6 +140,7 @@ CwndChangeS15 (uint32_t oldCwnd, uint32_t newCwnd)
   fPlotQueue << Simulator::Now ().GetSeconds () << " " << newCwnd/1446.0 << std::endl;
   fPlotQueue.close ();
 }
+
 static void
 CwndChangeS16 (uint32_t oldCwnd, uint32_t newCwnd)
 {
@@ -144,6 +148,7 @@ CwndChangeS16 (uint32_t oldCwnd, uint32_t newCwnd)
   fPlotQueue << Simulator::Now ().GetSeconds () << " " << newCwnd/1446.0 << std::endl;
   fPlotQueue.close ();
 }
+
 static void
 CwndChangeS17 (uint32_t oldCwnd, uint32_t newCwnd)
 {
@@ -151,6 +156,7 @@ CwndChangeS17 (uint32_t oldCwnd, uint32_t newCwnd)
   fPlotQueue << Simulator::Now ().GetSeconds () << " " << newCwnd/1446.0 << std::endl;
   fPlotQueue.close ();
 }
+
 static void
 CwndChangeS18 (uint32_t oldCwnd, uint32_t newCwnd)
 {
@@ -158,6 +164,7 @@ CwndChangeS18 (uint32_t oldCwnd, uint32_t newCwnd)
   fPlotQueue << Simulator::Now ().GetSeconds () << " " << newCwnd/1446.0 << std::endl;
   fPlotQueue.close ();
 }
+
 static void
 CwndChangeS19 (uint32_t oldCwnd, uint32_t newCwnd)
 {
@@ -165,6 +172,8 @@ CwndChangeS19 (uint32_t oldCwnd, uint32_t newCwnd)
   fPlotQueue << Simulator::Now ().GetSeconds () << " " << newCwnd/1446.0 << std::endl;
   fPlotQueue.close ();
 }
+
+// Functions to trace change in cwnd for senders S2-1 to S2-20
 static void
 CwndChangeS20 (uint32_t oldCwnd, uint32_t newCwnd)
 {
@@ -212,6 +221,7 @@ CwndChangeS25 (uint32_t oldCwnd, uint32_t newCwnd)
   fPlotQueue << Simulator::Now ().GetSeconds () << " " << newCwnd/1446.0 << std::endl;
   fPlotQueue.close ();
 }
+
 static void
 CwndChangeS26 (uint32_t oldCwnd, uint32_t newCwnd)
 {
@@ -219,6 +229,7 @@ CwndChangeS26 (uint32_t oldCwnd, uint32_t newCwnd)
   fPlotQueue << Simulator::Now ().GetSeconds () << " " << newCwnd/1446.0 << std::endl;
   fPlotQueue.close ();
 }
+
 static void
 CwndChangeS27 (uint32_t oldCwnd, uint32_t newCwnd)
 {
@@ -226,6 +237,7 @@ CwndChangeS27 (uint32_t oldCwnd, uint32_t newCwnd)
   fPlotQueue << Simulator::Now ().GetSeconds () << " " << newCwnd/1446.0 << std::endl;
   fPlotQueue.close ();
 }
+
 static void
 CwndChangeS28 (uint32_t oldCwnd, uint32_t newCwnd)
 {
@@ -233,6 +245,7 @@ CwndChangeS28 (uint32_t oldCwnd, uint32_t newCwnd)
   fPlotQueue << Simulator::Now ().GetSeconds () << " " << newCwnd/1446.0 << std::endl;
   fPlotQueue.close ();
 }
+
 static void
 CwndChangeS29 (uint32_t oldCwnd, uint32_t newCwnd)
 {
@@ -240,6 +253,7 @@ CwndChangeS29 (uint32_t oldCwnd, uint32_t newCwnd)
   fPlotQueue << Simulator::Now ().GetSeconds () << " " << newCwnd/1446.0 << std::endl;
   fPlotQueue.close ();
 }
+
 static void
 CwndChangeS210 (uint32_t oldCwnd, uint32_t newCwnd)
 {
@@ -247,6 +261,7 @@ CwndChangeS210 (uint32_t oldCwnd, uint32_t newCwnd)
   fPlotQueue << Simulator::Now ().GetSeconds () << " " << newCwnd/1446.0 << std::endl;
   fPlotQueue.close ();
 }
+
 static void
 CwndChangeS211 (uint32_t oldCwnd, uint32_t newCwnd)
 {
@@ -286,6 +301,7 @@ CwndChangeS215 (uint32_t oldCwnd, uint32_t newCwnd)
   fPlotQueue << Simulator::Now ().GetSeconds () << " " << newCwnd/1446.0 << std::endl;
   fPlotQueue.close ();
 }
+
 static void
 CwndChangeS216 (uint32_t oldCwnd, uint32_t newCwnd)
 {
@@ -293,6 +309,7 @@ CwndChangeS216 (uint32_t oldCwnd, uint32_t newCwnd)
   fPlotQueue << Simulator::Now ().GetSeconds () << " " << newCwnd/1446.0 << std::endl;
   fPlotQueue.close ();
 }
+
 static void
 CwndChangeS217 (uint32_t oldCwnd, uint32_t newCwnd)
 {
@@ -300,6 +317,7 @@ CwndChangeS217 (uint32_t oldCwnd, uint32_t newCwnd)
   fPlotQueue << Simulator::Now ().GetSeconds () << " " << newCwnd/1446.0 << std::endl;
   fPlotQueue.close ();
 }
+
 static void
 CwndChangeS218 (uint32_t oldCwnd, uint32_t newCwnd)
 {
@@ -307,6 +325,7 @@ CwndChangeS218 (uint32_t oldCwnd, uint32_t newCwnd)
   fPlotQueue << Simulator::Now ().GetSeconds () << " " << newCwnd/1446.0 << std::endl;
   fPlotQueue.close ();
 }
+
 static void
 CwndChangeS219 (uint32_t oldCwnd, uint32_t newCwnd)
 {
@@ -314,6 +333,8 @@ CwndChangeS219 (uint32_t oldCwnd, uint32_t newCwnd)
   fPlotQueue << Simulator::Now ().GetSeconds () << " " << newCwnd/1446.0 << std::endl;
   fPlotQueue.close ();
 }
+
+// Functions to trace change in cwnd for senders S3-1 to S3-10
 static void
 CwndChangeS30 (uint32_t oldCwnd, uint32_t newCwnd)
 {
@@ -390,19 +411,21 @@ CwndChangeS39 (uint32_t oldCwnd, uint32_t newCwnd)
   fPlotQueue.close ();
 }
 
-
+// Function to calculate drops in a particular Queue.
 static void
 DropAtQueue (Ptr<OutputStreamWrapper> stream, Ptr<const QueueDiscItem> item)
 {
   *stream->GetStream () << Simulator::Now ().GetSeconds () << " 1" << std::endl;
 }
 
+// Function to calculate marks in a particular Queue.
 static void
 MarkAtQueue (Ptr<OutputStreamWrapper> stream, Ptr<const QueueDiscItem> item, const char* reason)
 {
   *stream->GetStream () << Simulator::Now ().GetSeconds () << " 1" << std::endl;
 }
 
+// Trace Function for cwnd.
 void
 TraceCwnd (uint32_t node, uint32_t cwndWindow,
            Callback <void, uint32_t, uint32_t> CwndTrace)
@@ -410,6 +433,7 @@ TraceCwnd (uint32_t node, uint32_t cwndWindow,
   Config::ConnectWithoutContext ("/NodeList/" + std::to_string (node) + "/$ns3::TcpL4Protocol/SocketList/" + std::to_string (cwndWindow) + "/CongestionWindow", CwndTrace);
 }
 
+// Function to install sink application.
 void InstallPacketSink (Ptr<Node> node, uint16_t port)
 {
   PacketSinkHelper sink ("ns3::TcpSocketFactory",
@@ -419,6 +443,7 @@ void InstallPacketSink (Ptr<Node> node, uint16_t port)
   sinkApps.Stop (Seconds (stopTime));
 }
 
+// Function to install BulkSend application.
 void InstallBulkSend (Ptr<Node> node, Ipv4Address address, uint16_t port, 
                       uint32_t nodeId, uint32_t cwndWindow,
                       Callback <void, uint32_t, uint32_t> CwndTrace)
@@ -481,7 +506,7 @@ int main (int argc, char *argv[])
     {
       // TcpWestwoodPlus is not an actual TypeId name; we need TcpWestwood here
       Config::SetDefault ("ns3::TcpL4Protocol::SocketType", TypeIdValue (TcpWestwood::GetTypeId ()));
-      // the default protocol type in ns3::TcpWestwood is WESTWOOD
+      // The default protocol type in ns3::TcpWestwood is WESTWOOD
       Config::SetDefault ("ns3::TcpWestwood::ProtocolType", EnumValue (TcpWestwood::WESTWOODPLUS));
     }
   else
@@ -490,8 +515,9 @@ int main (int argc, char *argv[])
       NS_ABORT_MSG_UNLESS (TypeId::LookupByNameFailSafe (transport_prot, &tcpTid), "TypeId " << transport_prot << " not found");
       Config::SetDefault ("ns3::TcpL4Protocol::SocketType", TypeIdValue (TypeId::LookupByName (transport_prot)));
     }
-  Config::SetDefault ("ns3::TcpL4Protocol::RecoveryType",
-                      TypeIdValue (TypeId::LookupByName ("ns3::TcpPrrRecovery")));
+  Config::SetDefault ("ns3::TcpL4Protocol::RecoveryType", TypeIdValue (TypeId::LookupByName ("ns3::TcpPrrRecovery")));
+
+  // Create nodes for S1, S2, S3, R1, R2, Triumph 1 (T1), Triumph (T2), Scorpion (Scorp).
   NodeContainer S1, S2, S3, R1, R2, T, Scorp;
   T.Create (2);
   Scorp.Create (1);
@@ -503,6 +529,7 @@ int main (int argc, char *argv[])
   R2.Create (20);
   R1.Create (1);
 
+  // Create Point to Point Helpers.
 
   PointToPointHelper pointToPointSR;
   pointToPointSR.SetDeviceAttribute ("DataRate", StringValue ("1000Mbps"));
@@ -516,6 +543,7 @@ int main (int argc, char *argv[])
   pointToPointT1.SetDeviceAttribute ("DataRate", StringValue ("10000Mbps"));
   pointToPointT1.SetChannelAttribute ("Delay", StringValue ("0.05ms"));
 
+  // Create Net Device containers.
   NetDeviceContainer T1ScorpDev, T2ScorpDev, S1T1Dev, S2T1Dev, S3T2Dev, R1T2Dev, R2T2Dev;
   T1ScorpDev = pointToPointT.Install (T.Get (0), Scorp.Get (0));
   T2ScorpDev = pointToPointT1.Install (Scorp.Get (0), T.Get (1));
@@ -538,6 +566,7 @@ int main (int argc, char *argv[])
       R2T2Dev.Add (pointToPointSR.Install (R2.Get (i), T.Get (1)));
     }
 
+  // Install Internet Stack.
   InternetStackHelper stack;
   stack.Install (S1);
   stack.Install (S2);
@@ -547,7 +576,7 @@ int main (int argc, char *argv[])
   stack.Install (T);
   stack.Install (Scorp);
 
-  //Assign IP address. We keep each sender-switch link in a different network
+  // Assign IP address.
   Ipv4AddressHelper address;
   Ipv4InterfaceContainer S1Int, S2Int, S3Int, R1Int, R2Int, T1Int,T2Int;
 
@@ -606,6 +635,7 @@ int main (int argc, char *argv[])
   address.SetBase ("10.7.0.0", "255.255.255.0");
   T2Int = address.Assign (T2ScorpDev);
 
+  // Create folders to save the results.
   dir += (currentTime + "/");
   std::string dirToSave = "mkdir -p " + dir;
   system (dirToSave.c_str ());
@@ -615,6 +645,7 @@ int main (int argc, char *argv[])
   system ((dirToSave + "/queueTraces/").c_str ());
   system (("cp -R PlotScripts-gfc-dctcp/* " + dir + "/pcap/").c_str ());
 
+  // Set default parameters.
   Config::SetDefault ("ns3::TcpSocket::SndBufSize", UintegerValue (1 << 20));
   Config::SetDefault ("ns3::TcpSocket::RcvBufSize", UintegerValue (1 << 20));
   Config::SetDefault ("ns3::TcpSocket::InitialCwnd", UintegerValue (10));
@@ -644,6 +675,7 @@ int main (int argc, char *argv[])
   TrafficControlHelper tch;
   tch.SetRootQueueDisc (queue_disc_type);
 
+  // Install Queue Disc on router queues and collect stats.
   QueueDiscContainer qd, qd1, qd2;
   tch.Uninstall (T1ScorpDev);
   qd = tch.Install (T1ScorpDev);
@@ -669,19 +701,17 @@ int main (int argc, char *argv[])
   streamWrapper = asciiTraceHelper.CreateFileStream (dir + "/queueTraces/mark-2.plotme");
   qd2.Get (1)->TraceConnectWithoutContext ("Mark", MakeBoundCallback (&MarkAtQueue, streamWrapper));
 
-Config::Set ("/$ns3::NodeListPriv/NodeList/0/$ns3::Node/$ns3::TrafficControlLayer/RootQueueDiscList/0/$" + queue_disc_type + "/MaxSize", QueueSizeValue (QueueSize ("666p")));
+// Configure Queue Disc parameters on individual queues.
+  Config::Set ("/$ns3::NodeListPriv/NodeList/0/$ns3::Node/$ns3::TrafficControlLayer/RootQueueDiscList/0/$" + queue_disc_type + "/MaxSize", QueueSizeValue (QueueSize ("666p")));
   Config::Set ("/$ns3::NodeListPriv/NodeList/1/$ns3::Node/$ns3::TrafficControlLayer/RootQueueDiscList/1/$" + queue_disc_type + "/MaxSize", QueueSizeValue (QueueSize ("666p")));
   Config::Set ("/$ns3::NodeListPriv/NodeList/2/$ns3::Node/$ns3::TrafficControlLayer/RootQueueDiscList/1/$" + queue_disc_type + "/MaxSize", QueueSizeValue (QueueSize ("666p")));
 
- Config::Set ("/$ns3::NodeListPriv/NodeList/0/$ns3::Node/$ns3::TrafficControlLayer/RootQueueDiscList/0/$ns3::PiQueueDisc/QueueRef", DoubleValue (50));
+  Config::Set ("/$ns3::NodeListPriv/NodeList/0/$ns3::Node/$ns3::TrafficControlLayer/RootQueueDiscList/0/$ns3::PiQueueDisc/QueueRef", 
+DoubleValue (50));
   Config::Set ("/$ns3::NodeListPriv/NodeList/1/$ns3::Node/$ns3::TrafficControlLayer/RootQueueDiscList/1/$ns3::PiQueueDisc/QueueRef", DoubleValue (50));
   Config::Set ("/$ns3::NodeListPriv/NodeList/2/$ns3::Node/$ns3::TrafficControlLayer/RootQueueDiscList/1/$ns3::PiQueueDisc/QueueRef", DoubleValue (50));
 
-/*  Config::Set ("/$ns3::NodeListPriv/NodeList/0/$ns3::Node/$ns3::TrafficControlLayer/RootQueueDiscList/0/$ns3::RedQueueDisc/LinkBandwidth", DataRateValue (DataRate ("10000Mbps")));
-  Config::Set ("/$ns3::NodeListPriv/NodeList/1/$ns3::Node/$ns3::TrafficControlLayer/RootQueueDiscList/1/$ns3::RedQueueDisc/LinkBandwidth", DataRateValue (DataRate ("1000Mbps")));
-  Config::Set ("/$ns3::NodeListPriv/NodeList/2/$ns3::Node/$ns3::TrafficControlLayer/RootQueueDiscList/1/$ns3::RedQueueDisc/LinkBandwidth", DataRateValue (DataRate ("10000Mbps")));*/
-
-Config::Set ("/$ns3::NodeListPriv/NodeList/0/$ns3::Node/$ns3::TrafficControlLayer/RootQueueDiscList/0/$ns3::PiQueueDisc/A", DoubleValue ( 0.00001016130096));
+  Config::Set ("/$ns3::NodeListPriv/NodeList/0/$ns3::Node/$ns3::TrafficControlLayer/RootQueueDiscList/0/$ns3::PiQueueDisc/A", DoubleValue ( 0.00001016130096));
   Config::Set ("/$ns3::NodeListPriv/NodeList/1/$ns3::Node/$ns3::TrafficControlLayer/RootQueueDiscList/1/$ns3::PiQueueDisc/A", DoubleValue (0.0007079237047));
   Config::Set ("/$ns3::NodeListPriv/NodeList/2/$ns3::Node/$ns3::TrafficControlLayer/RootQueueDiscList/1/$ns3::PiQueueDisc/A", DoubleValue (0.00007477268187));
 
@@ -694,13 +724,13 @@ Config::Set ("/$ns3::NodeListPriv/NodeList/0/$ns3::Node/$ns3::TrafficControlLaye
   Config::Set ("/$ns3::NodeListPriv/NodeList/2/$ns3::Node/$ns3::TrafficControlLayer/RootQueueDiscList/1/$ns3::PiQueueDisc/W", DoubleValue (4000));
 
   uint16_t port = 50000;
-  //Install Sink applications on R1
+  // Install Sink applications on R1.
   for(int i=0; i<20; i++)
     {
       InstallPacketSink (R1.Get (0), port+i);
     }
 
-  //Install BulkSend applications on S1 and S3
+  // Install BulkSend applications on nodes of S1 and S3.
   InstallBulkSend (S1.Get (0), R1Int.GetAddress (0), port, 3, 0, MakeCallback (&CwndChangeS10));
   InstallBulkSend (S1.Get (1), R1Int.GetAddress (0), port+1, 4, 0, MakeCallback (&CwndChangeS11));
   InstallBulkSend (S1.Get (2), R1Int.GetAddress (0), port+2, 5, 0, MakeCallback (&CwndChangeS12));
@@ -722,13 +752,13 @@ Config::Set ("/$ns3::NodeListPriv/NodeList/0/$ns3::Node/$ns3::TrafficControlLaye
   InstallBulkSend (S3.Get (8), R1Int.GetAddress (0), port+18, 41, 0, MakeCallback (&CwndChangeS38));
   InstallBulkSend (S3.Get (9), R1Int.GetAddress (0), port+19, 42, 0, MakeCallback (&CwndChangeS39));
 
-  //Install Sink applications on R2
+  // Install Sink applications on R2.
   for (uint32_t i = 0; i < R2.GetN (); i++)
     {
       InstallPacketSink (R2.Get (i), port);
     }
 
-  //Install BulkSend applications on S2
+  // Install BulkSend applications on nodes of S2.
   InstallBulkSend (S2.Get (0), R2Int.GetAddress (0), port, 13, 0, MakeCallback (&CwndChangeS20));
   InstallBulkSend (S2.Get (1), R2Int.GetAddress (2), port, 14, 0, MakeCallback (&CwndChangeS21));
   InstallBulkSend (S2.Get (2), R2Int.GetAddress (4), port, 15, 0, MakeCallback (&CwndChangeS22));
@@ -757,6 +787,8 @@ Config::Set ("/$ns3::NodeListPriv/NodeList/0/$ns3::Node/$ns3::TrafficControlLaye
 
   Simulator::Stop (Seconds (stopTime));
   Simulator::Run ();
+
+  // Collect Queue Stats.
   std::ofstream myfile;
   myfile.open (dir + "queueStats.txt", std::fstream::in | std::fstream::out | std::fstream::app);
   myfile << std::endl;

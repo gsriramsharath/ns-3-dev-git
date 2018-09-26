@@ -2,6 +2,7 @@ import sys
 import os
 import argparse
 
+# Input parameters to the script.
 parser = argparse.ArgumentParser(description='Throughput Calculation for a application.')
 parser.add_argument('inFile', type=str)
 parser.add_argument('outFileBytes', type=str)
@@ -47,6 +48,7 @@ valPacket      = 0
 totalval       = 0
 totalvalPacket = 0
 
+# Convert pcap file to a .csv file and calculate throughput.
 with open(file_name[0:file_name.rindex('.')] + '.csv') as fq:
     fp = fq.readlines()
     for line in fp:

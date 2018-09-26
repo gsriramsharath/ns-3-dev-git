@@ -1,3 +1,5 @@
+# Plot cwnd for all senders.
+
 set xrange [3:10]
 set yrange [0:200]
 set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
