@@ -1,0 +1,8 @@
+set xrange [3:10]
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "TP-Switches-Packets.png"
+set xlabel "Time (sec)"
+set ylabel "Throughput (Packets/sec)"
+set key outside;
+set key right top;
+plot "TP-T1.plotme" title "T1" with lines lw 1.5,"TP-T2.plotme" title "T2" with lines lw 1.5,"TP-T3.plotme" title "T3" with lines lw 1.5,"TP-T4.plotme" title "T4" with lines lw 1.5 ,"TP-T5.plotme" title "T5" with lines lw 1.5,"TP-T6.plotme" title "T6" with lines lw 1.5 ,"TP-T7.plotme" title "T7" with lines lw 1.5,"TP-T8.plotme" title "T8" with lines lw 1.5,"TP-T3-R2-1.plotme" title "T3-R21" with lines lw 1.5,"TP-T3-R2-2.plotme" title "T3-R22" with lines lw 1.5,"TP-T3-R2-3.plotme" title "T3-R23" with lines lw 1.5,"TP-T3-R2-4.plotme" title "T3-R24" with lines lw 1.5,"TP-T3-R2-5.plotme" title "T3-R25" with lines lw 1.5,"TP-T3-R2-6.plotme" title "T3-R26" with lines lw 1.5,"TP-T3-R2-7.plotme" title "T3-R27" with lines lw 1.5,"TP-T3-R2-8.plotme" title "T3-R28" with lines lw 1.5,"TP-T3-R2-9.plotme" title "T3-R29" with lines lw 1.5,"TP-T3-R2-1.plotme" title "T3-R210" with lines lw 1.5 ,"TP-T4-R1.plotme" title "T4-R1" with lines lw 1.5,"TP-T4-R3.plotme" title "T4-R3" with lines lw 1.5,"TP-T5-R2.plotme" title "T5-R2" with lines lw 1.5,"TP-T6-RD.plotme" title "T6-RD" with lines lw 1.5,"TP-T7-RF.plotme" title "T7-RF" with lines lw 1.5,"TP-T8-R3.plotme" title "T8-R3" with lines lw 1.5,"TP-T8-RC.plotme" title "T8-RC" with lines lw 1.5,"TP-T9-R1.plotme" title "T9-R1" with lines lw 1.5,"TP-T9-RE.plotme" title "T9-RE" with lines lw 1.5,"TP-T9-RB.plotme" title "T9-RB" with lines lw 1.5

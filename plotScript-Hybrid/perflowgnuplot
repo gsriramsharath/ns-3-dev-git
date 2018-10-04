@@ -1,0 +1,148 @@
+set xrange [3:10]
+set yrange [0:100]
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "ProportionalFairshare-S1-1.png"
+set xlabel "Time (sec)" font "Verdana"
+set ylabel "Throughput (Mbps)" font "Verdana"
+set key outside;
+set key right top;
+plot "TP-SR1-1.plotme" using ($1):($2*1000) title "S1-1" with lines lw 1.5, 81.186 title "S1-1-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S1-2.png"
+plot "TP-SR1-2.plotme" using ($1):($2*1000) title "S1-2" with lines lw 1.5, 81.188 title "S1-2-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S1-3.png"
+plot "TP-SR1-3.plotme" using ($1):($2*1000) title "S1-3" with lines lw 1.5, 81.181 title "S1-3-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S1-4.png"
+plot "TP-SR1-4.plotme" using ($1):($2*1000) title "S1-4" with lines lw 1.5, 81.214 title "S1-4-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S1-5.png"
+plot "TP-SR1-5.plotme" using ($1):($2*1000) title "S1-5" with lines lw 1.5, 81.221 title "S1-5-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S1-6.png"
+plot "TP-SRGf1-1.plotme" using ($1):($2*1000) title "S1-6" with lines lw 1.5, 2.1991 title "S1-6-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S1-7.png"
+plot "TP-SRGf1-2.plotme" using ($1):($2*1000) title "S1-7" with lines lw 1.5, 2.1991 title "S1-7-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S1-8.png"
+plot "TP-SRGf1-3.plotme" using ($1):($2*1000) title "S1-8" with lines lw 1.5, 2.1991 title "S1-8-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S1-9.png"
+plot "TP-SRGf1-4.plotme" using ($1):($2*1000) title "S1-9" with lines lw 1.5, 2.1991 title "S1-9-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S1-10.png"
+plot "TP-SRGf1-5.plotme" using ($1):($2*1000) title "S1-10" with lines lw 1.5, 2.1991 title "S1-10-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set yrange [0:1000]
+# Sender S2
+
+set output "ProportionalFairshare-S2-1.png"
+plot "TP-SR2-1.plotme" using ($1):($2*1000) title "S2-1" with lines lw 1.5, 951.78 title "S2-1-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-2.png"
+plot "TP-SR2-2.plotme" using ($1):($2*1000) title "S2-2" with lines lw 1.5, 947.37 title "S2-2-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-3.png"
+plot "TP-SR2-3.plotme" using ($1):($2*1000) title "S2-3" with lines lw 1.5, 935.76 title "S2-3-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-4.png"
+plot "TP-SR2-4.plotme" using ($1):($2*1000) title "S2-4" with lines lw 1.5, 945.77 title "S2-4-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-5.png"
+plot "TP-SR2-5.plotme" using ($1):($2*1000) title "S2-5" with lines lw 1.5, 945 title "S2-5-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-6.png"
+plot "TP-SR2-6.plotme" using ($1):($2*1000) title "S2-6" with lines lw 1.5, 952.24 title "S2-6-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-7.png"
+plot "TP-SR2-7.plotme" using ($1):($2*1000) title "S2-7" with lines lw 1.5, 942.56 title "S2-7-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-8.png"
+plot "TP-SR2-8.plotme" using ($1):($2*1000) title "S2-8" with lines lw 1.5, 947.32 title "S2-8-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-9.png"
+plot "TP-SR2-9.plotme" using ($1):($2*1000) title "S2-9" with lines lw 1.5, 947.43 title "S2-9-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-10.png"
+plot "TP-SR2-10.plotme" using ($1):($2*1000) title "S2-10" with lines lw 1.5, 942.51 title "S2-10-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-11.png"
+plot "TP-SRGf2-1.plotme" using ($1):($2*1000) title "S2-11" with lines lw 1.5, 12.528 title "S2-11-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-12.png"
+plot "TP-SRGf2-2.plotme" using ($1):($2*1000) title "S2-12" with lines lw 1.5, 12.528 title "S2-12-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-13.png"
+plot "TP-SRGf2-3.plotme" using ($1):($2*1000) title "S2-13" with lines lw 1.5, 12.529 title "S2-13-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-14.png"
+plot "TP-SRGf2-4.plotme" using ($1):($2*1000) title "S2-14" with lines lw 1.5, 12.528 title "S2-14-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-15.png"
+plot "TP-SRGf2-5.plotme" using ($1):($2*1000) title "S2-15" with lines lw 1.5, 12.528 title "S2-15-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-16.png"
+plot "TP-SRGf2-6.plotme" using ($1):($2*1000) title "S2-16" with lines lw 1.5, 12.528 title "S2-16-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-17.png"
+plot "TP-SRGf2-7.plotme" using ($1):($2*1000) title "S2-17" with lines lw 1.5, 12.528 title "S2-17-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-18.png"
+plot "TP-SRGf2-8.plotme" using ($1):($2*1000) title "S2-18" with lines lw 1.5, 12.528 title "S2-18-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-19.png"
+plot "TP-SRGf2-9.plotme" using ($1):($2*1000) title "S2-19" with lines lw 1.5, 12.528 title "S2-19-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S2-20.png"
+plot "TP-SRGf2-10.plotme" using ($1):($2*1000) title "S2-20" with lines lw 1.5, 12.528 title "S2-20-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set yrange [0:100]
+# Sender S3
+
+set output "ProportionalFairshare-S3-1.png"
+plot "TP-SR3-1.plotme" using ($1):($2*1000) title "S3-1" with lines lw 1.5, 88.803 title "S3-1-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S3-2.png"
+plot "TP-SR3-2.plotme" using ($1):($2*1000) title "S3-2" with lines lw 1.5, 88.802 title "S3-2-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S3-3.png"
+plot "TP-SR3-3.plotme" using ($1):($2*1000) title "S3-3" with lines lw 1.5, 88.8 title "S3-3-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S3-4.png"
+plot "TP-SR3-4.plotme" using ($1):($2*1000) title "S3-4" with lines lw 1.5, 88.803 title "S3-4-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S3-5.png"
+plot "TP-SR3-5.plotme" using ($1):($2*1000) title "S3-5" with lines lw 1.5, 88.803 title "S3-5-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S3-6.png"
+plot "TP-SRGf3-1.plotme" using ($1):($2*1000) title "S3-6" with lines lw 1.5, 2.7443 title "S3-6-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S3-7.png"
+plot "TP-SRGf3-2.plotme" using ($1):($2*1000) title "S3-7" with lines lw 1.5, 2.7443 title "S3-7-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S3-8.png"
+plot "TP-SRGf3-3.plotme" using ($1):($2*1000) title "S3-8" with lines lw 1.5, 2.7443 title "S3-8-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S3-9.png"
+plot "TP-SRGf3-4.plotme" using ($1):($2*1000) title "S3-9" with lines lw 1.5, 2.7443 title "S3-9-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-S3-10.png"
+plot "TP-SRGf3-5.plotme" using ($1):($2*1000) title "S3-10" with lines lw 1.5, 2.7443 title "S3-10-PF" with lines lw 1.5 dashtype 2 lc 8
+
+
+set output "ProportionalFairshare-B.png"
+plot "TP-SRB-1.plotme"  using ($1):($2*1000) title "B1" with lines lw 1.5 ,"TP-SRB-2.plotme"  using ($1):($2*1000) title "B2" with lines lw 1.5 ,"TP-SRB-3.plotme" using ($1):($2*1000) title "B3" with lines lw 1.5 , 7.2674 title "B-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-C.png"
+plot "TP-SRC-1.plotme"  using ($1):($2*1000) title "C1" with lines lw 1.5,"TP-SRC-2.plotme"  using ($1):($2*1000) title "C2" with lines lw 1.5,"TP-SRC-3.plotme" using ($1):($2*1000) title   "C3" with lines lw 1.5, 34.494 title "C-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-D.png"
+plot "TP-SRD-1.plotme"  using ($1):($2*1000) title "D1" with lines lw 1.5,"TP-SRD-2.plotme"  using ($1):($2*1000) title "D2" with lines lw 1.5,"TP-SRD-3.plotme"  using ($1):($2*1000) title "D3" with lines lw 1.5,"TP-SRD-4.plotme"  using ($1):($2*1000) title "D4" with lines lw 1.5,"TP-SRD-5.plotme"  using ($1):($2*1000) title "D5" with lines lw 1.5,"TP-SRD-6.plotme"  using ($1):($2*1000) title "D6" with lines lw 1.5, 4.2138 title "D-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-E.png"
+plot "TP-SRE-1.plotme"  using ($1):($2*1000) title "E1" with lines lw 1.5,"TP-SRE-2.plotme"  using ($1):($2*1000) title "E2" with lines lw 1.5,"TP-SRE-3.plotme"  using ($1):($2*1000) title "E3" with lines lw 1.5,"TP-SRE-4.plotme"  using ($1):($2*1000) title "E4" with lines lw 1.5,"TP-SRE-5.plotme" using ($1):($2*1000) title   "E5" with lines lw 1.5,"TP-SRE-6.plotme"  using ($1):($2*1000) title "E6" with lines lw 1.5, 11.2 title "E-PF" with lines lw 1.5 dashtype 2 lc 8
+
+set output "ProportionalFairshare-F.png"
+plot "TP-SRF-1.plotme"  using ($1):($2*1000) title "F1" with lines lw 1.5, "TP-SRF-2.plotme"  using ($1):($2*1000) title "F2" with lines lw 1.5, 51.74 title "F-PF" with lines lw 1.5 dashtype 2 lc 8

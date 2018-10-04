@@ -1,0 +1,73 @@
+set xrange [3:10]
+set yrange [0:1.1]
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "Prob-R1.png"
+set xlabel "Time (sec)" font "Verdana"
+set ylabel "Mark Probability" font "Verdana"
+set key outside;
+set key right top;
+plot "Prob-R-1.plotme" title "R1" with lines lw 1.5
+
+set yrange [0:1.1]
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "Prob-R2.png"
+set xlabel "Time (sec)" font "Verdana"
+set ylabel "Mark Probability" font "Verdana"
+set key outside;
+set key right top;
+plot "Prob-R-2.plotme" title "R2" with lines lw 1.5
+
+set yrange [0:1.1]
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "Prob-R3.png"
+set xlabel "Time (sec)" font "Verdana"
+set ylabel "Mark Probability" font "Verdana"
+set key outside;
+set key right top;
+plot "Prob-R-3.plotme" title "R3" with lines lw 1.5
+
+set yrange [0:1.1]
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "Prob-R4.png"
+set xlabel "Time (sec)" font "Verdana"
+set ylabel "Mark Probability" font "Verdana"
+set key outside;
+set key right top;
+plot "Prob-R-4.plotme" title "R4" with lines lw 1.5
+
+set yrange [0:1.1]
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "Prob-R5.png"
+set xlabel "Time (sec)" font "Verdana"
+set ylabel "Mark Probability" font "Verdana"
+set key outside;
+set key right top;
+plot "Prob-R-5.plotme" title "R5" with lines lw 1.5
+
+set yrange [0:1.1]
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "Prob-R6.png"
+set xlabel "Time (sec)" font "Verdana"
+set ylabel "Mark Probability" font "Verdana"
+set key outside;
+set key right top;
+plot "Prob-R-6.plotme" title "R6" with lines lw 1.5
+
+set yrange [0:1.1]
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "Prob-R7.png"
+set xlabel "Time (sec)" font "Verdana"
+set ylabel "Mark Probability" font "Verdana"
+set key outside;
+set key right top;
+plot "Prob-R-7.plotme" title "R7" with lines lw 1.5
+
+set yrange [0:1.1]
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "Prob-R8.png"
+set xlabel "Time (sec)" font "Verdana"
+set ylabel "Mark Probability" font "Verdana"
+set key outside;
+set key right top;
+plot "Prob-R-8.plotme" title "R8" with lines lw 1.5
+
