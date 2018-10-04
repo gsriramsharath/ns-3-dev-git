@@ -1,0 +1,258 @@
+set xrange [3:10]
+set yrange [0:700]
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-0.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-1.plotme" title "R1" with lines lw 1.5
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-1.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-2.plotme" title "R2" with lines lw 1.5
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-2.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-3.plotme" title "R3" with lines lw 1.5
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-3.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-4.plotme" title "R4" with lines lw 1.5
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-4.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-5.plotme" title "R5" with lines lw 1.5
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-5.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-6.plotme" title "R6" with lines lw 1.5
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-6.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-7.plotme" title "R7" with lines lw 1.5
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-7.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-8.plotme" title "R8" with lines lw 1.5
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-8.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-R1-1.plotme" title "R1-1" with lines lw 1.5
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-9.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-R2-2.plotme" title "R2-2" with lines lw 1.5
+
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-10.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-R2-3.plotme" title "R2-3" with lines lw 1.5
+
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-11.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-R2-4.plotme" title "R2-4" with lines lw 1.5
+
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-12.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-R2-5.plotme" title "R2-5" with lines lw 1.5
+
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-13.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-R2-6.plotme" title "R2-6" with lines lw 1.5
+
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-14.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-R2-7.plotme" title "R2-7" with lines lw 1.5
+
+
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-15.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-R2-8.plotme" title "R2-8" with lines lw 1.5
+
+
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-16.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-R2-9.plotme" title "R2-9" with lines lw 1.5
+
+
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-17.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-R2-10.plotme" title "R2-10" with lines lw 1.5
+
+
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-18.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-R3-1.plotme" title "R3-1" with lines lw 1.5
+
+
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-19.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-RB-1.plotme" title "RB" with lines lw 1.5
+
+
+
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-20.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-RC-1.plotme" title "RC" with lines lw 1.5
+
+
+
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-21.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-RD-1.plotme" title "RD-1" with lines lw 1.5
+
+
+
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-22.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-RE-1.plotme" title "RE" with lines lw 1.5
+
+
+
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-23.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-RF-1.plotme" title "RF" with lines lw 1.5
+
+
+
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-24.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-RGf1-1.plotme" title "RGf1" with lines lw 1.5
+
+
+
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-25.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-RGf2-1.plotme" title "RGf2" with lines lw 1.5
+
+
+
+
+set terminal pngcairo enhanced color lw 2 size 800,600 font 'Arial-Bold'
+set output "queue-26.png"
+set xlabel "Time (sec)"
+set ylabel "Queue occupancy (No. of packets)"
+set key outside;
+set key right top;
+plot "queue-RGf3-1.plotme" title "RGf3" with lines lw 1.5
+
+
+
+
+
