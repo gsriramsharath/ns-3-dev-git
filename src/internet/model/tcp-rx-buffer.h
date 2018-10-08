@@ -150,6 +150,15 @@ public:
   bool Add (Ptr<Packet> p, TcpHeader const& tcph);
 
   /**
+   * Check for a duplicate packet.
+   *
+   * \param p packet
+   * \param tcph packet's TCP header
+   * \returns True when the packet is a duplicate packet, false otherwise.
+   */
+  bool CheckDupPacket(Ptr<Packet> p, TcpHeader const& tcph);
+
+  /**
    * Extract data from the head of the buffer as indicated by nextRxSeq.
    * The extracted data is going to be forwarded to the application.
    *

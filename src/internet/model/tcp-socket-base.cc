@@ -68,6 +68,12 @@ NS_LOG_COMPONENT_DEFINE ("TcpSocketBase");
 
 NS_OBJECT_ENSURE_REGISTERED (TcpSocketBase);
 
+typedef std::pair<SequenceNumber32, SequenceNumber32> SackBlock;
+
+int is_dsack = 0;
+SequenceNumber32 dsack_first;
+SequenceNumber32 dsack_second;
+
 TypeId
 TcpSocketBase::GetTypeId (void)
 {
@@ -105,6 +111,11 @@ TcpSocketBase::GetTypeId (void)
                    BooleanValue (true),
                    MakeBooleanAccessor (&TcpSocketBase::m_sackEnabled),
                    MakeBooleanChecker ())
+    .AddAttribute ("DSACK", "Enable or disable DSACK option",
+                  BooleanValue (true),
+                  MakeBooleanAccessor (&TcpSocketBase::m_dsackEnabled),
+                  MakeBooleanChecker ())
+
     .AddAttribute ("Timestamp", "Enable or disable Timestamp option",
                    BooleanValue (true),
                    MakeBooleanAccessor (&TcpSocketBase::m_timestampEnabled),
@@ -321,6 +332,7 @@ TcpSocketBase::TcpSocketBase (const TcpSocketBase& sock)
     m_highRxMark (sock.m_highRxMark),
     m_highRxAckMark (sock.m_highRxAckMark),
     m_sackEnabled (sock.m_sackEnabled),
+    m_dsackEnabled (sock.m_dsackEnabled),
     m_winScalingEnabled (sock.m_winScalingEnabled),
     m_rcvWindShift (sock.m_rcvWindShift),
     m_sndWindShift (sock.m_sndWindShift),
@@ -2514,6 +2526,7 @@ TcpSocketBase::SendEmptyPacket (uint8_t flags)
 
       if (m_sackEnabled)
         {
+          std::cout<<"sack is enabled"<<std::endl;
           AddOptionSackPermitted (header);
         }
 
@@ -2561,6 +2574,7 @@ TcpSocketBase::SendEmptyPacket (uint8_t flags)
 
   m_txTrace (p, header, this);
 
+  std::cout<<"ack is "<<header.GetAckNumber()<<std::endl;
   if (m_endPoint != nullptr)
     {
       m_tcp->SendPacket (p, header, m_endPoint->GetLocalAddress (),
@@ -3230,8 +3244,23 @@ TcpSocketBase::ReceivedData (Ptr<Packet> p, const TcpHeader& tcpHeader)
   NS_LOG_DEBUG ("Data segment, seq=" << tcpHeader.GetSequenceNumber () <<
                 " pkt size=" << p->GetSize () );
 
+  std::cout<<"sequence no "<<tcpHeader.GetSequenceNumber()<<" "<<(tcpHeader.GetSequenceNumber()+SequenceNumber32 (p->GetSize()))<<std::endl;
+
   // Put into Rx buffer
   SequenceNumber32 expectedSeq = m_rxBuffer->NextRxSequence ();
+
+  if ((m_dsackEnabled) && (m_rxBuffer->CheckDupPacket (p,tcpHeader)))
+    {
+      is_dsack = 1;
+      uint32_t pktSize = p->GetSize ();
+      SequenceNumber32 headSeq = tcpHeader.GetSequenceNumber ();
+      SequenceNumber32 tailSeq = headSeq + SequenceNumber32 (pktSize);
+
+      dsack_first = headSeq;
+      dsack_second = tailSeq;
+      std::cout<<"Duplicate Packet "<<dsack_first<<"  ***  "<<dsack_second<<"\n"<<std::endl;
+     }
+
   if (!m_rxBuffer->Add (p, tcpHeader))
     { // Insert failed: No data or RX buffer full
       if (m_tcb->m_ecnState == TcpSocketState::ECN_CE_RCVD || m_tcb->m_ecnState == TcpSocketState::ECN_SENDING_ECE)
@@ -3987,8 +4016,20 @@ TcpSocketBase::AddOptionSack (TcpHeader& header)
       return;
     }
 
-  // Append the allowed number of SACK blocks
   Ptr<TcpOptionSack> option = CreateObject<TcpOptionSack> ();
+
+  if (is_dsack == 1)
+    {
+      SackBlock s;
+      s.first = dsack_first;
+      s.second = dsack_second;
+     // cout<<"in addoption with "<<s.first<<" "<<s.second<<endl;
+      option->AddSackBlock(s);
+      allowedSackBlocks--;
+      is_dsack = 0;
+    }
+
+  // Append the allowed number of SACK blocks
   TcpOptionSack::SackList::iterator i;
   for (i = sackList.begin (); allowedSackBlocks > 0 && i != sackList.end (); ++i)
     {
