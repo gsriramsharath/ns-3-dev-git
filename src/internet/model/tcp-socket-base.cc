@@ -111,7 +111,7 @@ TcpSocketBase::GetTypeId (void)
                    BooleanValue (true),
                    MakeBooleanAccessor (&TcpSocketBase::m_sackEnabled),
                    MakeBooleanChecker ())
-    .AddAttribute ("DSACK", "Enable or disable DSACK option",
+    .AddAttribute ("Dsack", "Enable or disable DSACK option",
                   BooleanValue (true),
                   MakeBooleanAccessor (&TcpSocketBase::m_dsackEnabled),
                   MakeBooleanChecker ())
@@ -3258,7 +3258,7 @@ TcpSocketBase::ReceivedData (Ptr<Packet> p, const TcpHeader& tcpHeader)
 
       dsack_first = headSeq;
       dsack_second = tailSeq;
-      std::cout<<"Duplicate Packet "<<dsack_first<<"  ***  "<<dsack_second<<"\n"<<std::endl;
+      NS_LOG_DEBUG ("Duplicate Packet "<<dsack_first<<"  ***  "<<dsack_second);
      }
 
   if (!m_rxBuffer->Add (p, tcpHeader))

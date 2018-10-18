@@ -527,6 +527,14 @@ protected:
   Ptr<TcpSocketState> GetTcb (SocketWho who);
 
   /**
+   * \brief Get the Tx buffer from selected socket
+   *
+   * \param who socket where get the TCB
+   * \return the tx buffer
+   */
+  Ptr<TcpTxBuffer> GetTxBuffer (SocketWho who);
+
+  /**
    * \brief Get the Rx buffer from selected socket
    *
    * \param who socket where get the TCB

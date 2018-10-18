@@ -860,6 +860,23 @@ TcpGeneralTest::GetTcb (SocketWho who)
       NS_FATAL_ERROR ("Not defined");
     }
 }
+Ptr<TcpTxBuffer>
+TcpGeneralTest::GetTxBuffer (SocketWho who)
+{
+  if (who == SENDER)
+    {
+      return DynamicCast<TcpSocketMsgBase> (m_senderSocket)->m_txBuffer;
+    }
+  else if (who == RECEIVER)
+    {
+
+      return DynamicCast<TcpSocketMsgBase> (m_receiverSocket)->m_txBuffer;
+    }
+  else
+    {
+      NS_FATAL_ERROR ("Not defined");
+    }
+}
 
 Ptr<TcpRxBuffer>
 TcpGeneralTest::GetRxBuffer (SocketWho who)
