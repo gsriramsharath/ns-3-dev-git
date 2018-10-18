@@ -38,7 +38,7 @@
 #include "ns3/traffic-control-module.h"
 #include "ns3/log.h"
 #include "ns3/random-variable-stream.h"
-#include "ns3/gtk-config-store.h"
+//#include "ns3/gtk-config-store.h"
 #include "ns3/flow-monitor-module.h"
 #include "ns3/callback.h"
 

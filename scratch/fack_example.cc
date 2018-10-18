@@ -20,9 +20,9 @@
  */
 
 // The network topology used in this example is based on the Fig. 1 described in
-//Mathis, M., & Mahdavi, J. (1996, August). 
-//Forward acknowledgement: Refining TCP congestion control.
-//In ACM SIGCOMM Computer Communication Review (Vol. 26, No. 4, pp. 281-291). ACM.
+// Mathis, M., & Mahdavi, J. (1996, August). 
+// Forward acknowledgement: Refining TCP congestion control.
+// In ACM SIGCOMM Computer Communication Review (Vol. 26, No. 4, pp. 281-291). ACM.
 
 #include <iostream>
 #include <string>
@@ -37,7 +37,7 @@
 #include "ns3/traffic-control-module.h"
 #include "ns3/log.h"
 #include "ns3/random-variable-stream.h"
-#include "ns3/gtk-config-store.h"
+//#include "ns3/gtk-config-store.h"
 #include "ns3/flow-monitor-module.h"
 #include "ns3/callback.h"
 
@@ -147,8 +147,8 @@ int main (int argc, char *argv[])
   Config::SetDefault ("ns3::TcpSocket::SndBufSize", UintegerValue (1 << 20));
   Config::SetDefault ("ns3::TcpSocket::RcvBufSize", UintegerValue (1 << 20));
   Config::SetDefault ("ns3::TcpSocket::InitialCwnd", UintegerValue (10));
-  Config::SetDefault("ns3::TcpSocketBase::Sack",BooleanValue(true));
-  Config::SetDefault("ns3::TcpSocketBase::Fack",BooleanValue(fack));
+  Config::SetDefault ("ns3::TcpSocketBase::Sack",BooleanValue(true));
+  Config::SetDefault ("ns3::TcpSocketBase::Fack",BooleanValue(fack));
   Config::SetDefault (queue_disc_type + "::MaxSize", QueueSizeValue (QueueSize ("17p")));
   Config::SetDefault ("ns3::BurstErrorModel::ErrorRate", DoubleValue (0.01));
 
@@ -192,7 +192,7 @@ int main (int argc, char *argv[])
   R1R2 = p2pR.Install(routers.Get (0), routers.Get (1));
   R2S2 = p2pSR2.Install(routers.Get (1), nodes.Get (1));
 
-  //Install Internet stack on the end nodes
+  //Install Internet stack on the end nodes and the routers
   InternetStackHelper stack;
   stack.Install (nodes);
   stack.Install(routers);
@@ -203,11 +203,11 @@ int main (int argc, char *argv[])
 
   address.SetBase("10.1.1.0", "255.255.255.252");
   
-  S1Int = address.Assign(S1R1);
-  address.NewNetwork();
-  routerInt = address.Assign(R1R2);
-  address.NewNetwork();
-  S2Int = address.Assign(R2S2);
+  S1Int = address.Assign (S1R1);
+  address.NewNetwork ();
+  routerInt = address.Assign (R1R2);
+  address.NewNetwork ();
+  S2Int = address.Assign (R2S2);
 
   dir += (currentTime + "/");
   std::string dirToSave = "mkdir -p " + dir;
@@ -215,7 +215,9 @@ int main (int argc, char *argv[])
   system ((dirToSave + "/cwndTraces/").c_str ());
   system ((dirToSave + "/queueTraces/").c_str ());
 
-
+  system (("cp PlotScripts/gnuplotscriptCwnd " + dir + "/cwndTraces/").c_str ());
+  system (("cp PlotScripts/gnuplotscriptQ " + dir ).c_str ());
+  system (("cp PlotScripts/plotshellTP.sh " + dir ).c_str ());
 
   //Set Queue Disc
   TrafficControlHelper tch;
@@ -246,4 +248,3 @@ int main (int argc, char *argv[])
   Simulator::Destroy ();
   return 0;
 }
-
