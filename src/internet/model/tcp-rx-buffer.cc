@@ -230,7 +230,7 @@ TcpRxBuffer::Add (Ptr<Packet> p, TcpHeader const& tcph)
 bool
 TcpRxBuffer::CheckDupPacket(Ptr<Packet> p, TcpHeader const& tcph)
 {
- NS_LOG_FUNCTION (this << p << tcph);
+  NS_LOG_FUNCTION (this << p << tcph);
 
   uint32_t pktSize = p->GetSize ();
   SequenceNumber32 headSeq = tcph.GetSequenceNumber ();
@@ -241,19 +241,26 @@ TcpRxBuffer::CheckDupPacket(Ptr<Packet> p, TcpHeader const& tcph)
   if (m_data.size ())
     {
       SequenceNumber32 maxSeq = m_data.begin ()->first + SequenceNumber32 (m_maxBuffer);
-      if (maxSeq < tailSeq) tailSeq = maxSeq;
-      if (tailSeq < headSeq) headSeq = tailSeq;
+      if (maxSeq < tailSeq)
+        {
+          tailSeq = maxSeq;
+        }
+      if (tailSeq < headSeq)
+        {
+          headSeq = tailSeq;
+        }
     }
+
   // Remove overlapped bytes from packet
   BufIterator i = m_data.begin ();
 
-  for(i = m_data.begin();i != m_data.end (); ++i)
-      {
-         if(headSeq >= i->first and tailSeq <= i->first + SequenceNumber32 (i->second->GetSize ())){
-            //  cout<<"returning 2"<<endl;
-            return true;
-        }
-    }
+  for (i = m_data.begin();i != m_data.end (); ++i)
+     {
+         if (headSeq >= i->first && tailSeq <= i->first + SequenceNumber32 (i->second->GetSize ()))
+           {
+             return true;
+           }
+     }
 return false;
 }
 
